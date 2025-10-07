@@ -1,5 +1,6 @@
+// src/index.js
 import React from 'react';
-import ReactDOM from 'react-dom/client'; //connects the app with public/index.html
+import ReactDOM from 'react-dom/client'; // connects the app with public/index.html
 
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -10,7 +11,7 @@ import store from './app/store';
 
 import './index.css';
 
-//with ReactDOM we connect our app to the root div inside public/index.html
+// Connect React app to root div in public/index.html
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -20,5 +21,5 @@ root.render(
         <App />
       </BrowserRouter>
     </ToggleColorModeProvider>
-  </Provider>,
+  </Provider>
 );

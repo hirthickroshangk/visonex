@@ -1,3 +1,4 @@
+// src/utils/ToggleColorMode.jsx
 import React, { useState, useMemo, createContext } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
@@ -6,23 +7,21 @@ export const ColorModeContext = createContext();
 function ToggleColorMode({ children }) {
   const [mode, setMode] = useState('light');
 
-  const theme = useMemo(() => {
-    return createTheme({
-      palette: {
-        mode,
-      },
-    });
-  }, [mode]);
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode]
+  );
 
   const toggleColorMode = () => {
-    setMode((prevMode) => {
-      return prevMode === 'light' ? 'dark' : 'light';
-    });
+    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   };
 
-  const colorModeValue = useMemo(() => {
-    return { mode, setMode, toggleColorMode };
-  }, [mode]);
+  const colorModeValue = useMemo(() => ({ mode, setMode, toggleColorMode }), [mode]);
 
   return (
     <ColorModeContext.Provider value={colorModeValue}>

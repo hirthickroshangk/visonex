@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { Divider, List, ListItem, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress } from '@mui/material';
+import { Divider, List, ListItem, ListItemText, ListSubheader, ListItemIcon, Box, CircularProgress, ListItemButton } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material/styles'; // fixed import
 import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
 import { useGetGenresQuery } from '../../services/TMDB';
-import genreCategoryIcons from '../../assets/genres and categories';
+import genreCategoryIcons from '../../assets/genres_and_categories'; // fixed path
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 import lightLogo from '../../assets/images/lightLogo.png';
@@ -28,9 +28,9 @@ function Sidebar({ setMobileOpen }) {
 
   useEffect(() => {
     setMobileOpen(false);
-  }, [genreIdOrCategoryName]);
+  }, [genreIdOrCategoryName, setMobileOpen]);
 
-  // ✅ Store genres in localStorage for voice assistant
+  // Store genres in localStorage
   useEffect(() => {
     if (data?.genres) {
       localStorage.setItem('genres', JSON.stringify(data.genres));
@@ -51,14 +51,13 @@ function Sidebar({ setMobileOpen }) {
         <ListSubheader>Categories</ListSubheader>
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
-            <ListItem
-              onClick={() => dispatch(selectGenreOrCategory(value))}
-              button
-            >
-              <ListItemIcon>
-                <img src={genreCategoryIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
-              </ListItemIcon>
-              <ListItemText primary={label} />
+            <ListItem disablePadding>
+              <ListItemButton onClick={() => dispatch(selectGenreOrCategory(value))}>
+                <ListItemIcon>
+                  <img src={genreCategoryIcons[label.toLowerCase()]} className={classes.genreImages} height={30} />
+                </ListItemIcon>
+                <ListItemText primary={label} />
+              </ListItemButton>
             </ListItem>
           </Link>
         ))}
@@ -73,14 +72,13 @@ function Sidebar({ setMobileOpen }) {
         ) : (
           data.genres.map(({ name, id }) => (
             <Link key={name} className={classes.links} to="/">
-              <ListItem
-                onClick={() => dispatch(selectGenreOrCategory(id))}
-                button
-              >
-                <ListItemIcon>
-                  <img src={genreCategoryIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
-                </ListItemIcon>
-                <ListItemText primary={name} />
+              <ListItem disablePadding>
+                <ListItemButton onClick={() => dispatch(selectGenreOrCategory(id))}>
+                  <ListItemIcon>
+                    <img src={genreCategoryIcons[name.toLowerCase()]} className={classes.genreImages} height={30} />
+                  </ListItemIcon>
+                  <ListItemText primary={name} />
+                </ListItemButton>
               </ListItem>
             </Link>
           ))
