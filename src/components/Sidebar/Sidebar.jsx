@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import useStyles from './styles';
 import { useGetGenresQuery } from '../../services/TMDB';
-import genreCategoryIcons from '../../assets/genres_and_categories'; // fixed path
+import genreCategoryIcons from '../../assets/genres and categories'; // fixed path
 import { selectGenreOrCategory } from '../../features/currentGenreOrCategory';
 
 import lightLogo from '../../assets/images/lightLogo.png';
